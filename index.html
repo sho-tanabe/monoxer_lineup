@@ -5,7 +5,8 @@
 <script>
 $(document).ready(function(){
   $("#mySelect").on("keyup", function() {
-    var value = $(this).text().toLowerCase();
+    var value = $(this).val().toLowerCase();
+    window.alert(value);
     $("#myTable tr").filter(function() {
       $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
