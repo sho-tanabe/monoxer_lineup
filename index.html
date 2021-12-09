@@ -1,29 +1,42 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-<script src="jquery.extablefilter-latest.js"></script> 
-<table id="data">
-    <thead>
-        <tr>
-            <th>No</th>
-            <th>Class</th>
-            <th>Category</th>
-            <th>Qty</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td>1</td>
-            <td>core</td>
-            <td>Ajax</td>
-            <td>203</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>core</td>
-            <td>Ajax</td>
-            <td>204</td>
-        </tr>
-    </tbody>
-</table>
-<script>    
-$('table.data').exTableFilter();    
-</script>    
+<head>
+<script type="text/javascript" src="js/jquery.tablesorter.js"></script> <!-- tablesortのためのjqueryライブラリ -->
+<script language=javascript>
+$(function(){   
+    $('#sorttable').tablesorter();
+});
+</script>
+</head>
+<body>
+    <table id="sorttable">
+        <thead>
+            <tr>
+                <th>キャンペーン名</th>
+                <th>広告グループ名</th>
+                <th>広告費</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td colspan="2">合計</td>
+                <td>39000</td>
+            </tr>
+        </tfoot>
+        <tbody>
+            <tr>
+                <td>キャンペーンA</td>
+                <td>広告グループ1</td>
+                <td>20000</td>
+            </tr>
+            <tr>
+                <td>キャンペーンB</td>
+                <td>広告グループ2</td>
+                <td>10000</td>
+            </tr>
+            <tr>
+                <td>キャンペーンC</td>
+                <td>広告グループ3</td>
+                <td>9000</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
