@@ -1,197 +1,73 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-
-    <title>私は仕事が大好きです。</title>
-  </head>
-  <body>
-
-<style type="text/css">
-.actions a {
-    display: block;
-    margin: 25px auto 0;
-    width: 200px;
-    text-align: center;
-    background: #b31d14;
-    color: #c8c8c8;
-    padding: 6px;
-    border-radius: 3px;
-    text-decoration: none;
-}
-
-.filters {
-    margin-bottom: 20px;
-}
-
-.filter-container {
-    float: left;
-    width: 20%;
-    padding-right: 10px;
-}
-
-.filter-container:last-of-type {
-    padding-right: 0;
-}
-
-.filter-container input {
-    -webkit-appearance: none;
-    border: 1px solid #999;
-    background: #eee;
-    border-radius: 3px;
-    font-size: 18px;
-    width: 100%;
-}
-
-.filter-container input:focus {
-    outline: none;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table th {
-    text-align: left;
-    border-bottom: 1px solid #043a47;
-}
-
-table th, table td {
-    padding: 6px 4px;
-}
-
-table td {
-    border-bottom: 1px solid #087891;
-}
-
-table tr:last-of-type td {
-    border-bottom: none;
-}
-
-table tr td:last-of-type {
-    border-right: none;
-}
-
-.clearfix {
-    clear: both;
-    width: 100%;
-} 
-</style>
-
-
-
-<div class='container'>
-  <div class='filters'>
-    <div class='filter-container'>
-      <input autocomplete='off' class='filter' name='名前' placeholder='名前' />
-    </div>
-    <div class='filter-container'>
-      <input autocomplete='off' class='filter' name='性別' placeholder='性別' />
-    </div>
-    <div class='filter-container'>
-      <input autocomplete='off' class='filter' name='誕生日' placeholder='誕生日' />
-    </div>
-    <div class='filter-container'>
-      <input autocomplete='off' class='filter' name='キャリア' placeholder='キャリア' />
-    </div>
-    <div class='clearfix'></div>
-  </div>
-</div>
-<div class='container'>
-  <table>
-    <thead>
-      <th>名前</th>
-      <th>性別</th>
-      <th>誕生日</th>
-      <th>キャリア</th>
-    </thead>
-    <tbody>
-      <tr><td>日高 太朗</td><td>男</td><td>2013/4/5</td><td>ドコモ</td></tr>
-<tr><td>山西 那奈</td><td>女</td><td>2012/9/14</td><td>ソフトバンク</td></tr>
-<tr><td>高松 知世</td><td>女</td><td>2013/3/20</td><td>ドコモ</td></tr>
-<tr><td>大矢 翔太</td><td>男</td><td>2013/1/9</td><td>ドコモ</td></tr>
-<tr><td>平松 奈央</td><td>女</td><td>2013/4/13</td><td>ドコモ</td></tr>
-<tr><td>阿部 ヒカル</td><td>女</td><td>2013/5/30</td><td>au</td></tr>
-<tr><td>小川 みき</td><td>女</td><td>2013/2/9</td><td>au</td></tr>
-<tr><td>小室 和香</td><td>女</td><td>2013/3/29</td><td>ドコモ</td></tr>
-<tr><td>前川 薫</td><td>女</td><td>2012/12/16</td><td>ソフトバンク</td></tr>
-<tr><td>大林 陽介</td><td>男</td><td>2013/5/22</td><td>ドコモ</td></tr>
-    </tbody>
-  </table>
-
-
-  
-  <script>
-    (function($) {
-  $.fn.multifilter = function(options) {
-    var settings = $.extend( {
-      'target'        : $('table')
-    }, options);
-
-    jQuery.expr[":"].Contains = function(a, i, m) {
-      return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-    };
-
-    this.each(function() {
-      var $this = $(this);
-      container = settings.target
-      row_tag = 'tr';
-      item_tag = 'td'
-      rows = container.find($('tbody ' + row_tag))
-
-      var col = container.find('th:Contains(' + $this.attr('name') + ')');
-      var col_index = container.find($('thead th')).index(col); 
-      $this.change(function() {
-        input = $this
-        filter = $this.val();
-        rows.each(function() {
-          hidden_rows = []
-          visible_rows = []
-          row = $(this);
-          cell = $(row.children(item_tag)[col_index])
-          if (filter) {
-            if (cell.text().toLowerCase().indexOf(filter.toLowerCase()) != -1) {
-              cell.attr('data-filtered', 'positive');
-            } else {
-              cell.attr('data-filtered', 'negative');
-            }
-            if (row.find(item_tag + "[data-filtered=negative]").size() > 0) {
-               row.hide();
-            } else {
-              if (row.find(item_tag + "[data-filtered=positive]").size() > 0) {
-                row.show();
-              }
-            }
-          } else {
-            cell.attr('data-filtered', 'positive');
-            if (row.find(item_tag + "[data-filtered=negative]").size() > 0) {
-              row.hide();
-            } else {
-              if (row.find(item_tag + "[data-filtered=positive]").size() > 0) {
-                row.show();
-              }
-            }
-          }
-        })
-        return false;
-      }).keyup(function() {
-        $this.change();
-      });
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
     });
-  };
-})(jQuery);(jQuery);
+  });
+});
 </script>
-  <script>
-$(document).ready(function() {
-        $('.filter').multifilter()
-      })
-</script>
-  
-    </body>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+</head>
+<body>
+
+<h2>テーブルをフィルターする</h2>
+<p>テキスト入力すると検索条件となりフィルタリングします。</p>  
+<input id="myInput" type="text" placeholder="Search..">
+<br><br>
+
+<body>
+<table>
+  <thead>
+  <tr>
+    <th>姓</th>
+    <th>名</th>
+    <th>Email</th>
+  </tr>
+  </thead>
+  <tbody id="myTable">
+  <tr>
+    <td>テスト</td>
+    <td>太郎</td>
+    <td>test1@example.com</td>
+  </tr>
+  <tr>
+    <td>テスト</td>
+    <td>花子</td>
+    <td>test2@mail.com</td>
+  </tr>
+  <tr>
+    <td>テスト</td>
+    <td>三郎</td>
+    <td>test3@test.com</td>
+  </tr>
+  <tr>
+    <td>テスト</td>
+    <td>次郎</td>
+    <td>test4@test.com</td>
+  </tr>
+  </tbody>
+</table>
+</body>
 </html>
