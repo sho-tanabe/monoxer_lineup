@@ -22,26 +22,7 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="jquery.extablefilter-latest.js"></script>    
 <script>    
-$('table.data').exTableFilter({
-    filters : {
-        1 : {
-            append : {
-                template : '<div class="my-radio"><label><input type="radio"/> {label}</label></div>',
-                addBlank : false,
-                to : 'div.class-filter-area',
-                type : 'radio'
-            }
-        },
-        2 : {
-            append : {
-                blankLabel : '全て',
-                to : 'div.category-filter-area',
-                type : 'select'
-            },
-            selectValueMatch : true
-        }
-    }
-});
+$('table.data').exTableFilter('input.filter');
 </script>    
     
     
